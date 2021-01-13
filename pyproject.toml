@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "GDB-bot"
+name = "GDBot"
 version = "0.1.0"
 description = "A all-in-one bot for the GDB discord server"
 authors = ["SpaceMonk <gamedevsbasement@gmail.com>"]

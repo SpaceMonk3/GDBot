@@ -1,16 +1,15 @@
-# GDB-bot
+# GDBot
 A bot for the GDB discord server
 
-bot default command - ","
+default bot command - ","
 
-Current Features
+## Current Features
 
-1. Returns random quotes 
-
-   command - ,quote
+1. Returns random inspirational quotes.
+   command -> `,quote`
    
    
-2. Translates words and sentences from intitial language to specified language (no language detection yet)
 
-   command - ,tr <initial language> <target language> [text to be translated]
+2. Translates words and sentences from intitial language to specified language (no language detection yet).
+   command -> `,tr <initial language> <target language> [text to be translated]`
    
