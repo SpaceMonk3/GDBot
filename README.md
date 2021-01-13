@@ -6,10 +6,10 @@ default bot command - ","
 ## Current Features
 
 1. Returns random inspirational quotes.
-   command -> `,quote`
+   Command -> `,quote`
    
    
 
-2. Translates words and sentences from intitial language to specified language (no language detection yet).
-   command -> `,tr <initial language> <target language> [text to be translated]`
+2. Translates words and sentences from intitial language to specified language (no language detection yet). 
+   Command -> `,tr <initial language> <target language> [text to be translated]`
    
