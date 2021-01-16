@@ -2,12 +2,20 @@ import discord
 import os
 import requests
 import json
+#from boto.s3.connection import S3Connection
+#from boto.s3.key import Key
 
 client = discord.Client()
+
+'''
+s3 = S3Connection(os.environ['API_KEY'], os.environ['TOKEN'])
+bucket = s3.create_bucket('gdb_bot_secrets')
+k = Key(bucket)
 
 file = open('config.json',"r")
 config = json.loads(file.read())
 file.close()
+'''
 
 def get_Quote():
     response = requests.get("https://zenquotes.io/api/random")
@@ -23,16 +31,13 @@ def translate(content, src, trgt):
 
     headers = {
         'content-type': "application/json",
-        'x-rapidapi-key': config['key'],
+        'x-rapidapi-key': os.environ['API_KEY'],
         'x-rapidapi-host': "deep-translate1.p.rapidapi.com"
     }
     response = requests.request("POST", url, data=payload.encode('utf-8'), headers=headers)
     json_data = json.loads(response.text)
     text = "" + json_data['data']['translations']['translatedText'] + ""
     return (text)
-
-
-#bot_prefix = ','
 
 
 @client.event
@@ -45,12 +50,12 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith(config['prefix'] + 'quote'):
+    if message.content.startswith(',quote'):
         quote = get_Quote()
         await message.channel.send(quote)
 
 
-    if message.content.startswith(config['prefix'] + 'tr '):
+    if message.content.startswith(',tr '):
         src = message.content[4:6]
         trgt = message.content[7:9]
         content = message.content[10:len(message.content)]
@@ -58,15 +63,6 @@ async def on_message(message):
 
 			   
 
-
-
-client.run(config['token'])
-
-#important stuff
-
-#'Command disabled by Dev. so users get mad.. haha loser - unless you\'re the dev'
-
-#'Translated text: '+translate(content, src, trgt)
-
+client.run(os.environ['TOKEN'])
 
 
