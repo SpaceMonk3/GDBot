@@ -32,9 +32,6 @@ def translate(content, src, trgt):
     return (text)
 
 
-#bot_prefix = ','
-
-
 @client.event
 async def on_ready():
     print('PyBot logged in!!')
@@ -58,15 +55,6 @@ async def on_message(message):
 
 			   
 
-
-
 client.run(config['token'])
-
-#important stuff
-
-#'Command disabled by Dev. so users get mad.. haha loser - unless you\'re the dev'
-
-#'Translated text: '+translate(content, src, trgt)
-
 
 
