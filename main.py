@@ -2,21 +2,14 @@ import discord
 import os
 import requests
 import json
-#from boto.s3.connection import S3Connection
-#from boto.s3.key import Key
 
+#variables
 client = discord.Client()
 
-'''
-s3 = S3Connection(os.environ['API_KEY'], os.environ['TOKEN'])
-bucket = s3.create_bucket('gdb_bot_secrets')
-k = Key(bucket)
+bot_prefix = ','
+wel_message = """Welcome to Game Devs Basement! Head over to #:warning:-rules to become a verified member. Then head over to # :game_die:-roles to give yourself roles that describe you. Hope you enjoy your stay here :slight_smile:"""
 
-file = open('config.json',"r")
-config = json.loads(file.read())
-file.close()
-'''
-
+#functions
 def get_Quote():
     response = requests.get("https://zenquotes.io/api/random")
     json_data = json.loads(response.text)
@@ -40,9 +33,10 @@ def translate(content, src, trgt):
     return (text)
 
 
+#events
 @client.event
 async def on_ready():
-    print('PyBot logged in!!')
+    print('GDBot logged in!!')
 
 
 @client.event
@@ -50,19 +44,53 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith(',quote'):
+    if message.content.startswith(bot_prefix+'quote'):
         quote = get_Quote()
-        await message.channel.send(quote)
+        await message.channel.send('Here\'s a inspiring quote: ' + quote)
 
 
-    if message.content.startswith(',tr '):
+    if message.content.startswith(bot_prefix+'tr '):
         src = message.content[4:6]
         trgt = message.content[7:9]
         content = message.content[10:len(message.content)]
         await message.channel.send('Translated text: '+translate(content, src, trgt))
+		
+		
+		#if message.content == bot_prefix + "totalmem":
+    #    await message.channel.send(f"""# of Members: {id.member_count}""")
+		
 
-			   
+	
+@client.event
+async def on_member_join(member):
+    for channel in member.guild.channels:
+        if str(channel) == "general":
+            await channel.send_message(f"""Hey {member.mention}""" + wel_message)
 
+						
+
+
+#run bot
 client.run(os.environ['TOKEN'])
+
+
+
+
+#useless stuff for now... 
+
+'''
+s3 = S3Connection(os.environ['API_KEY'], os.environ['TOKEN'])
+bucket = s3.create_bucket('gdb_bot_secrets')
+k = Key(bucket)
+
+file = open('config.json',"r")
+config = json.loads(file.read())
+file.close()
+
+
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
+'''
+
 
 
