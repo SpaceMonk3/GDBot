@@ -20,7 +20,7 @@ def translate(content, src, trgt):
 
     headers = {
         'content-type': "application/json",
-        'x-rapidapi-key': 'df4a57dc9fmsh216de335b6e30ddp13e12ejsn10985c96a3ed',
+        'x-rapidapi-key': os.environ['API_KEY'],
         'x-rapidapi-host': "deep-translate1.p.rapidapi.com"
     }
     response = requests.request("POST", url, data=payload.encode('utf-8'), headers=headers)
