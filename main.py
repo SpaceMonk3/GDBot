@@ -1,9 +1,12 @@
 import discord
 import os
+from dotenv import load_dotenv
 import requests
 import json
 #from boto.s3.connection import S3Connection
 #from boto.s3.key import Key
+
+load_dotenv()
 
 client = discord.Client()
 
@@ -31,7 +34,7 @@ def translate(content, src, trgt):
 
     headers = {
         'content-type': "application/json",
-        'x-rapidapi-key': os.environ['API_KEY'],
+        'x-rapidapi-key': os.getenv("API_KEY"),
         'x-rapidapi-host': "deep-translate1.p.rapidapi.com"
     }
     response = requests.request("POST", url, data=payload.encode('utf-8'), headers=headers)
@@ -50,19 +53,23 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith(',quote'):
+    if message.content.startswith('/quote'):
         quote = get_Quote()
         await message.channel.send(quote)
 
 
-    if message.content.startswith(',tr '):
+    if message.content.startswith('/tr '):
         src = message.content[4:6]
         trgt = message.content[7:9]
         content = message.content[10:len(message.content)]
         await message.channel.send('Translated text: '+translate(content, src, trgt))
 
-			   
-
-client.run(os.environ['TOKEN'])
+client.run(os.getenv("TOKEN"))
+'''			   
+try:
+    client.run(os.getenv['TOKEN'])
+except: 
+    print("missing token wtf??")
+'''
 
 
