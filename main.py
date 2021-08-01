@@ -45,7 +45,7 @@ def translate(content, src, trgt):
 
 @client.event
 async def on_ready():
-    print('PyBot logged in!!')
+    print('GDBot logged in!!')
 
 
 @client.event
