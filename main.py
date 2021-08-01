@@ -53,6 +53,9 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    if client.user.mentioned_in(message):
+        await message.channel.send('Quit pinging me' + message.author.mention)
+
     if message.content.startswith('/quote'):
         quote = get_Quote()
         await message.channel.send(quote)
