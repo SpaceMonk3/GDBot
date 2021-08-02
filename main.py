@@ -1,4 +1,5 @@
 import discord
+from discord.ext import commands
 import os
 from dotenv import load_dotenv
 import requests
@@ -8,7 +9,8 @@ import json
 
 load_dotenv()
 
-client = discord.Client()
+intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
+client = commands.Bot(command_prefix = '/', intents = intents)
 
 '''
 s3 = S3Connection(os.environ['API_KEY'], os.environ['TOKEN'])
@@ -47,6 +49,12 @@ def translate(content, src, trgt):
 async def on_ready():
     print('GDBot logged in!!')
 
+@client.event
+async def on_member_join(member):
+    print(f'{member} has joined the server')
+    channel = client.get_channel(int(633406359378853932))
+    embedVar = discord.Embed(title='Welcome to GDB', description=member.mention, color=0x00ff00)
+    await channel.send(embed=embedVar)
 
 @client.event
 async def on_message(message):
