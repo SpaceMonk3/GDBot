@@ -53,7 +53,7 @@ async def on_ready():
 async def on_member_join(member):
     print(f'{member} has joined the server')
     channel = client.get_channel(int(633406359378853932))
-    embedVar = discord.Embed(title='Welcome to GDB', description=member.mention, color=0x00ff00)
+    embedVar = discord.Embed(title='Welcome to GDB', description=member.mention, color=0x34baeb)
     await channel.send(embed=embedVar)
 
 @client.event
