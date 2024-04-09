@@ -14,4 +14,7 @@ Command -> `/quote`
 2. Translates words and sentences from intitial language to specified language (no language detection yet). 
 
 Command -> `/tr <initial language> <target language> [text to be translated]`
-   
+
+
+### Devpost Link
+https://devpost.com/software/gdbot
